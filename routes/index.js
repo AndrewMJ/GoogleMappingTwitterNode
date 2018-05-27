@@ -1,12 +1,16 @@
 var express = require('express');
-var router = express.Router();
 
 var Twitter = require('twitter');
 var config = require('../config.js');
+var axios = require('axios');
+const cors = require('cors');
+const router = express();
+router.use(cors());
 
+var DATA = {};
 var T = new Twitter(config);
 
-/* GET home page. */
+/* GET home page. */ 
 router.get('/askTwitter', function(req, res,) {
 
   var params = {
@@ -30,16 +34,17 @@ router.get('/askTwitter', function(req, res,) {
             location: tweet.user.location,
             created_at: tweet.user.created_at,
             profile_image_url: tweet.user.profile_image_url
-  
-  
           })
         );
         console.log(parsedData);
-  
-    })
+        res.json(parsedData);
 
-  res.render('index', { title: 'Express' });
+      })
+
+
+  //res.render('index', { title: 'Express' });
 });
+
 
 
 module.exports = router;
