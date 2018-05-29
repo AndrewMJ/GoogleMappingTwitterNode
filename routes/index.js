@@ -13,9 +13,10 @@ var T = new Twitter(config);
 /* GET home page. */ 
 router.get('/askTwitter', function(req, res,) {
 
+  //#homedepot 
   var params = {
-    q: '#homedepot, homedepot',
-    count: 5,
+    q: 'homedepot',
+    count: 20,
     result_type: 'recent',
     lang: 'en'
   }
@@ -33,7 +34,9 @@ router.get('/askTwitter', function(req, res,) {
             id: tweet.id_str,
             location: tweet.user.location,
             created_at: tweet.user.created_at,
-            profile_image_url: tweet.user.profile_image_url
+            profile_image_url: tweet.user.profile_image_url,
+            screen_name: tweet.user.screen_name,
+            tweet_text: tweet.user.description
           })
         );
         console.log(parsedData);
